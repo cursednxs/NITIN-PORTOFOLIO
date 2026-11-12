@@ -2,6 +2,7 @@
     projects-loader.js
     Loads dynamic projects & graphic-design items from
     data/projects.json so you never have to edit HTML again.
+    Now supports image thumbnails in cards!
     ────────────────────────────────────────────────────────── */
 
 (function () {
@@ -10,26 +11,34 @@
   const DATA_URL = "data/projects.json";
 
   /* ── Card builder ── */
-  function buildCard(item, index) {
+  function buildCard(item, index, showImage) {
     const num = String(index + 1).padStart(2, "0");
     const hasLink = item.link && item.link.trim() !== "";
+    const hasImage = showImage && item.image && item.image.trim() !== "";
     const tag = hasLink ? "a" : "div";
 
     const el = document.createElement(tag);
-    el.className = "project";
+    el.className = "project" + (hasImage ? " project-has-image" : "");
     if (hasLink) {
       el.href = item.link;
       el.target = "_blank";
       el.rel = "noopener";
     }
 
+    const imageHtml = hasImage
+      ? `<div class="project-image"><img src="${escAttr(item.image)}" alt="${escAttr(item.title)}" loading="lazy"></div>`
+      : "";
+
     el.innerHTML = `
-      <span class="project-no">${num}</span>
-      <span class="project-arrow">${hasLink ? "↗" : "◎"}</span>
-      <div class="project-type">${escHtml(item.type || "PROJECT")}</div>
-      <h3>${escHtml(item.title)}</h3>
-      <p>${escHtml(item.description || "")}</p>
-      <strong>${hasLink ? "View →" : (item.tag || "")}</strong>
+      ${imageHtml}
+      <div class="project-content">
+        <span class="project-no">${num}</span>
+        <span class="project-arrow">${hasLink ? "↗" : "◎"}</span>
+        <div class="project-type">${escHtml(item.type || "PROJECT")}</div>
+        <h3>${escHtml(item.title)}</h3>
+        <p>${escHtml(item.description || "")}</p>
+        <strong>${hasLink ? "View →" : (item.tag || "")}</strong>
+      </div>
     `;
     return el;
   }
@@ -40,13 +49,17 @@
     return d.innerHTML;
   }
 
+  function escAttr(str) {
+    return str.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
   /* ── Render into containers ── */
   function render(data) {
     /* Selected Work dynamic extras */
     const projGrid = document.getElementById("dynamicProjectsGrid");
     if (projGrid && data.projects && data.projects.length) {
       data.projects.forEach((p, i) => {
-        projGrid.appendChild(buildCard(p, 6 + i)); // starts after the 6 hardcoded ones
+        projGrid.appendChild(buildCard(p, 6 + i, true));
       });
     }
 
@@ -54,7 +67,7 @@
     const gdGrid = document.getElementById("graphicDesignGrid");
     const gdEmpty = document.getElementById("gd-empty");
     if (gdGrid && data.graphicDesign && data.graphicDesign.length) {
-      data.graphicDesign.forEach((p, i) => gdGrid.appendChild(buildCard(p, i)));
+      data.graphicDesign.forEach((p, i) => gdGrid.appendChild(buildCard(p, i, true)));
       if (gdEmpty) gdEmpty.style.display = "none";
     } else if (gdEmpty) {
       gdEmpty.style.display = "block";

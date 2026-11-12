@@ -19,30 +19,34 @@
 
     .section-title{font:600 16px "Space Grotesk";letter-spacing:.08em;color:var(--gray);margin-bottom:28px;text-transform:uppercase}
 
-    .info-banner{background:#181818;border:1px solid var(--border);border-radius:12px;padding:22px 28px;margin-bottom:50px;line-height:1.7;color:var(--gray);font-size:13px}
+    .info-banner{background:#181818;border:1px solid var(--border);border-radius:12px;padding:22px 28px;margin-bottom:24px;line-height:1.7;color:var(--gray);font-size:13px}
     .info-banner strong{color:var(--light)}
     .info-banner code{background:#222;padding:3px 7px;border-radius:4px;font-size:12px;color:#ccc}
+    .info-banner a{color:#aaa;text-decoration:underline}
+    .info-banner ol{margin:12px 0 0 18px;padding:0}
+    .info-banner ol li{margin-bottom:6px}
 
-    /* ── Form ── */
     .form-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;margin-bottom:22px}
     .form-card h2{font:600 20px "Space Grotesk";margin-bottom:24px;letter-spacing:-.03em}
     .field{margin-bottom:18px}
     .field label{display:block;font-size:10px;letter-spacing:.12em;color:var(--gray);margin-bottom:6px;text-transform:uppercase}
+    .field .hint{font-size:11px;color:#666;margin-top:4px;line-height:1.5}
     .field input,.field textarea,.field select{width:100%;background:#1a1a1a;border:1px solid var(--border);border-radius:8px;padding:12px 14px;color:var(--light);font-size:14px;font-family:Inter,sans-serif;outline:none;transition:.2s}
     .field input:focus,.field textarea:focus,.field select:focus{border-color:#888}
     .field textarea{min-height:80px;resize:vertical}
     .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 
-    .btn-row{display:flex;gap:10px;margin-top:8px}
+    .btn-row{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap}
     .btn-primary{background:var(--accent);color:#080808;border:none;padding:13px 22px;border-radius:99px;font:600 12px Inter;cursor:pointer;transition:.2s;letter-spacing:.02em}
     .btn-primary:hover{background:#fff}
     .btn-secondary{background:transparent;color:var(--gray);border:1px solid var(--border);padding:13px 22px;border-radius:99px;font:500 12px Inter;cursor:pointer;transition:.2s}
     .btn-secondary:hover{border-color:#888;color:var(--light)}
 
-    /* ── List ── */
     .items-list{margin-top:18px}
-    .item-card{background:#0e0e0e;border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;transition:.2s}
+    .item-card{background:#0e0e0e;border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:16px;transition:.2s}
     .item-card:hover{border-color:#555}
+    .item-thumb{width:70px;height:52px;border-radius:6px;overflow:hidden;flex-shrink:0;border:1px solid var(--border)}.item-thumb img{width:100%;height:100%;object-fit:cover}
+    .item-info{flex:1;min-width:0}
     .item-info h4{font:600 16px "Space Grotesk";letter-spacing:-.03em;margin-bottom:4px}
     .item-info p{color:var(--gray);font-size:12px;max-width:500px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .item-info .item-type{font-size:9px;letter-spacing:.12em;color:#666;margin-bottom:4px}
@@ -52,7 +56,6 @@
 
     .empty-state{color:#555;text-align:center;padding:40px;font-size:13px}
 
-    /* ── Output ── */
     .output-section{margin-top:60px;border-top:1px solid var(--border);padding-top:40px}
     .json-output{background:#0a0a0a;border:1px solid var(--border);border-radius:10px;padding:20px;font:13px/1.6 monospace;color:#999;max-height:340px;overflow:auto;white-space:pre-wrap;word-break:break-all}
 
@@ -65,7 +68,16 @@
     .toast{position:fixed;bottom:30px;right:30px;background:#1a1a1a;border:1px solid var(--border);color:var(--light);padding:14px 22px;border-radius:10px;font-size:13px;opacity:0;transform:translateY(10px);transition:.3s;pointer-events:none;z-index:999}
     .toast.show{opacity:1;transform:translateY(0)}
 
-    @media(max-width:600px){.row{grid-template-columns:1fr}.container{padding:30px 20px 100px}.form-card{padding:22px}}
+    .img-preview{margin-top:8px;max-width:200px;border-radius:8px;border:1px solid var(--border);display:none}
+    .img-preview.visible{display:block}
+
+    .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+    .step-card{background:#141414;border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center}
+    .step-card .step-num{font:700 28px "Space Grotesk";color:var(--accent);margin-bottom:8px}
+    .step-card p{font-size:12px;color:var(--gray);line-height:1.5}
+    .step-card strong{color:var(--light)}
+
+    @media(max-width:600px){.row{grid-template-columns:1fr}.container{padding:30px 20px 100px}.form-card{padding:22px}.steps-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -78,14 +90,27 @@
 <div class="container">
 
   <div class="info-banner">
-    <strong>How this works:</strong> Add your projects and graphic design work below. Click <strong>"Save & Generate JSON"</strong> to download the updated <code>data/projects.json</code> file. Then replace the file in your repo's <code>data/</code> folder, commit, and push. Your portfolio updates automatically on Vercel. <strong>No HTML editing needed!</strong>
+    <strong>How to add images to your portfolio:</strong>
+    <ol>
+      <li>Go to <a href="https://imgbb.com" target="_blank">imgbb.com</a> (free, no signup needed)</li>
+      <li>Click <strong>"Start Uploading"</strong> → select your design image</li>
+      <li>After upload, click <strong>"Direct links"</strong> → copy the <strong>"Direct link"</strong> URL</li>
+      <li>Paste that URL in the <strong>"Image URL"</strong> field below</li>
+    </ol>
+    <br>
+    <strong>Or</strong> add images to your repo: put files in <code>assets/designs/</code> and use paths like <code>assets/designs/poster1.jpg</code>
+  </div>
+
+  <div class="info-banner" style="margin-bottom:50px">
+    <strong>After adding items:</strong> Go to the <strong>"Export JSON"</strong> tab → download <code>data/projects.json</code> → replace it in your GitHub repo → push. Vercel auto-deploys!
   </div>
 
   <!-- ── Tabs ── -->
   <div class="tab-bar">
-    <div class="tab active" data-tab="projects">Selected Work / Projects</div>
+    <div class="tab active" data-tab="projects">Selected Work</div>
     <div class="tab" data-tab="graphic">Graphic Design</div>
     <div class="tab" data-tab="output">Export JSON</div>
+    <div class="tab" data-tab="help">How to Add Images</div>
   </div>
 
   <!-- ═══════ TAB: Projects ═══════ -->
@@ -110,9 +135,17 @@
         <label>Description</label>
         <textarea id="proj-desc" placeholder="Short description of the project..."></textarea>
       </div>
-      <div class="field">
-        <label>Tag (shown when no link)</label>
-        <input type="text" id="proj-tag" placeholder="e.g. Kotlin / Android">
+      <div class="row">
+        <div class="field">
+          <label>Image URL (optional)</label>
+          <input type="url" id="proj-image" placeholder="https://i.ibb.co/... or assets/designs/file.jpg" oninput="previewImg(this,'proj-img-preview')">
+          <div class="hint">Upload to imgbb.com and paste the direct link, or use a local path like assets/designs/file.jpg</div>
+          <img class="img-preview" id="proj-img-preview">
+        </div>
+        <div class="field">
+          <label>Tag (shown when no link)</label>
+          <input type="text" id="proj-tag" placeholder="e.g. Kotlin / Android">
+        </div>
       </div>
       <div class="btn-row">
         <button class="btn-primary" onclick="addProject()">+ Add Project</button>
@@ -137,7 +170,7 @@
           <input type="text" id="gd-type" placeholder="e.g. POSTER DESIGN">
         </div>
         <div class="field">
-          <label>Link (to view / Behance / Drive etc.)</label>
+          <label>Link (to view full image / Behance / Drive)</label>
           <input type="url" id="gd-link" placeholder="https://...">
         </div>
       </div>
@@ -145,9 +178,17 @@
         <label>Description</label>
         <textarea id="gd-desc" placeholder="Brief description of the design work..."></textarea>
       </div>
-      <div class="field">
-        <label>Tag (shown when no link)</label>
-        <input type="text" id="gd-tag" placeholder="e.g. Canva / Photoshop">
+      <div class="row">
+        <div class="field">
+          <label>Image URL (thumbnail preview)</label>
+          <input type="url" id="gd-image" placeholder="https://i.ibb.co/... or assets/designs/file.jpg" oninput="previewImg(this,'gd-img-preview')">
+          <div class="hint">This image will show as a thumbnail on the card. Upload at imgbb.com for free!</div>
+          <img class="img-preview" id="gd-img-preview">
+        </div>
+        <div class="field">
+          <label>Tag (shown when no link)</label>
+          <input type="text" id="gd-tag" placeholder="e.g. Canva / Photoshop">
+        </div>
       </div>
       <div class="btn-row">
         <button class="btn-primary" onclick="addGraphicDesign()">+ Add Design Work</button>
@@ -163,12 +204,57 @@
     <div class="output-section" style="border:none;padding-top:0;margin-top:0">
       <div class="section-title">Generated JSON</div>
       <p style="color:var(--gray);font-size:13px;margin-bottom:16px;line-height:1.7">
-        Copy this JSON or click the download button. Then replace <code style="background:#222;padding:3px 7px;border-radius:4px;font-size:12px;color:#ccc">data/projects.json</code> in your repo and push to GitHub. Vercel will deploy automatically.
+        Copy this JSON or click the download button. Replace <code style="background:#222;padding:3px 7px;border-radius:4px;font-size:12px;color:#ccc">data/projects.json</code> in your repo and push to GitHub.
       </p>
       <div class="json-output" id="json-output"></div>
       <div class="btn-row" style="margin-top:16px">
         <button class="btn-primary" onclick="downloadJSON()">⬇ Download projects.json</button>
         <button class="btn-secondary" onclick="copyJSON()">📋 Copy to Clipboard</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ TAB: Help ═══════ -->
+  <div class="tab-content" id="tab-help">
+    <div class="form-card">
+      <h2>How to Add Images — Step by Step</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <p>Go to <strong><a href="https://imgbb.com" target="_blank" style="color:#aaa;text-decoration:underline">imgbb.com</a></strong><br>No signup needed. It's free forever.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <p>Click <strong>"Start Uploading"</strong> and select your design image (JPG, PNG, etc.)</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <p>After upload, find <strong>"Direct links"</strong> dropdown → copy the <strong>"Image URL"</strong></p>
+        </div>
+      </div>
+      <div class="steps-grid" style="margin-top:16px">
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <p>Come back here and paste the URL in the <strong>"Image URL"</strong> field</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">5</div>
+          <p>Fill the rest and click <strong>"+ Add"</strong></p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">6</div>
+          <p>Go to <strong>"Export JSON"</strong> tab, download, and replace in your GitHub repo!</p>
+        </div>
+      </div>
+
+      <div style="margin-top:30px;padding:20px;background:#181818;border-radius:10px;border:1px solid var(--border)">
+        <strong style="font-size:14px">Alternative: Add images directly to your repo</strong>
+        <p style="color:var(--gray);font-size:13px;line-height:1.7;margin-top:8px">
+          Create a folder <code style="background:#222;padding:3px 7px;border-radius:4px;font-size:12px;color:#ccc">assets/designs/</code> in your repo.
+          Put your images there (e.g. <code style="background:#222;padding:3px 7px;border-radius:4px;font-size:12px;color:#ccc">poster1.jpg</code>).
+          Then use the path <code style="background:#222;padding:3px 7px;border-radius:4px;font-size:12px;color:#ccc">assets/designs/poster1.jpg</code> as the Image URL.
+          Commit and push along with the updated JSON.
+        </p>
       </div>
     </div>
   </div>
@@ -198,6 +284,19 @@
     });
   });
 
+  /* ── Image Preview ── */
+  function previewImg(input, previewId) {
+    const preview = document.getElementById(previewId);
+    const url = input.value.trim();
+    if (url) {
+      preview.src = url;
+      preview.classList.add("visible");
+      preview.onerror = () => preview.classList.remove("visible");
+    } else {
+      preview.classList.remove("visible");
+    }
+  }
+
   /* ── Add Project ── */
   function addProject() {
     const title = g("proj-title");
@@ -207,9 +306,11 @@
       type: g("proj-type") || "PROJECT",
       link: g("proj-link"),
       description: g("proj-desc"),
+      image: g("proj-image"),
       tag: g("proj-tag")
     });
-    clearFields("proj-title", "proj-type", "proj-link", "proj-desc", "proj-tag");
+    clearFields("proj-title", "proj-type", "proj-link", "proj-desc", "proj-image", "proj-tag");
+    document.getElementById("proj-img-preview").classList.remove("visible");
     renderAll();
     toast("Project added!");
   }
@@ -223,9 +324,11 @@
       type: g("gd-type") || "GRAPHIC DESIGN",
       link: g("gd-link"),
       description: g("gd-desc"),
+      image: g("gd-image"),
       tag: g("gd-tag")
     });
-    clearFields("gd-title", "gd-type", "gd-link", "gd-desc", "gd-tag");
+    clearFields("gd-title", "gd-type", "gd-link", "gd-desc", "gd-image", "gd-tag");
+    document.getElementById("gd-img-preview").classList.remove("visible");
     renderAll();
     toast("Design work added!");
   }
@@ -249,6 +352,7 @@
     }
     c.innerHTML = items.map((item, i) => `
       <div class="item-card">
+        ${item.image ? `<div class="item-thumb"><img src="${esc(item.image)}" alt=""></div>` : ""}
         <div class="item-info">
           <div class="item-type">${esc(item.type)}</div>
           <h4>${esc(item.title)}</h4>
@@ -273,12 +377,12 @@
     a.download = "projects.json";
     a.click();
     URL.revokeObjectURL(a.href);
-    toast("Downloaded!");
+    toast("Downloaded! Replace data/projects.json in your repo and push.");
   }
 
   function copyJSON() {
     navigator.clipboard.writeText(JSON.stringify(state, null, 2))
-      .then(() => toast("Copied to clipboard!"))
+      .then(() => toast("Copied! Paste into data/projects.json in your repo."))
       .catch(() => toast("Copy failed — try manually."));
   }
 
@@ -291,7 +395,7 @@
     t.textContent = msg;
     t.classList.add("show");
     clearTimeout(t._timer);
-    t._timer = setTimeout(() => t.classList.remove("show"), 2500);
+    t._timer = setTimeout(() => t.classList.remove("show"), 3000);
   }
 </script>
 
