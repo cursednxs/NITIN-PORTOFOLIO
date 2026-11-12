@@ -22,6 +22,7 @@
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
+      <a href="#graphic-design">Design</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -40,6 +41,7 @@
         </p>
         <div class="actions">
           <a href="#projects" class="btn btn-light">View my work</a>
+          <a href="#graphic-design" class="btn btn-accent">Graphic Design</a>
           <a href="#contact" class="btn btn-dark">Contact me</a>
         </div>
         <div class="quick-info">
@@ -125,7 +127,7 @@
         </article>
 
         <article class="experience">
-          <div class="date">07/2026 — PRESENT</div>
+          <div class="date">07/2026 — 10/2026</div>
           <div>
             <h3>Gemini Student Ambassador</h3>
             <p>
@@ -200,6 +202,23 @@
           <strong>Research / Analytics</strong>
         </div>
       </div>
+
+      <!-- Dynamic projects added via admin panel appear here -->
+      <div id="dynamicProjectsGrid" class="projects-grid" style="margin-top:12px;"></div>
+    </section>
+
+    <section id="graphic-design" class="section">
+      <div class="section-tag">03.5 / GRAPHIC DESIGN</div>
+      <div class="project-heading">
+        <h2>Visual stories<br><span>that speak.</span></h2>
+        <p>Graphic design work including posters, social media creatives, branding and visual content.</p>
+      </div>
+      <div class="projects-grid" id="graphicDesignGrid">
+        <!-- Dynamic graphic design projects load here from admin panel -->
+      </div>
+      <p id="gd-empty" class="empty-msg" style="color:#666;text-align:center;padding:60px 0;font-size:14px;display:none;">
+        No graphic design work added yet.
+      </p>
     </section>
 
     <section class="section thinking">
@@ -207,7 +226,7 @@
       <div class="two-col">
         <h2>Research first.<br><span>Story second.</span></h2>
         <div class="copy">
-          <blockquote>“Balanced political journalism means checking political claims against evidence and showing the public what is actually happening.”</blockquote>
+          <blockquote>"Balanced political journalism means checking political claims against evidence and showing the public what is actually happening."</blockquote>
           <p>
             My academic interests include media ethics, digital journalism, public relations and
             communication theory. My approach is to research, verify, explain and then tell the story.
@@ -236,6 +255,7 @@
           <span>Kotlin</span>
           <span>Android Development</span>
           <span>Python</span>
+          <span>Graphic Design</span>
         </div>
       </div>
     </section>
@@ -262,5 +282,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
   <script src="script.js"></script>
+  <script src="projects-loader.js"></script>
 </body>
 </html>

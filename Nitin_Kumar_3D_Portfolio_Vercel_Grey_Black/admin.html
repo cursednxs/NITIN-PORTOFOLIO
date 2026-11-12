@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Nitin Kumar Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0b0b0b;--card:#111;--border:rgba(255,255,255,.12);--light:#e9e9e7;--gray:#8e8e8e;--accent:#e5e5e2}
+    *{box-sizing:border-box;margin:0}
+    body{background:var(--bg);color:var(--light);font-family:Inter,sans-serif;min-height:100vh;padding:0}
+    a{color:inherit}
+
+    .admin-header{padding:28px 5vw;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+    .admin-header h1{font:700 22px "Space Grotesk";letter-spacing:-.04em}
+    .admin-header a{font-size:12px;color:var(--gray);text-decoration:underline}
+
+    .container{max-width:900px;margin:0 auto;padding:50px 5vw 120px}
+
+    .section-title{font:600 16px "Space Grotesk";letter-spacing:.08em;color:var(--gray);margin-bottom:28px;text-transform:uppercase}
+
+    .info-banner{background:#181818;border:1px solid var(--border);border-radius:12px;padding:22px 28px;margin-bottom:50px;line-height:1.7;color:var(--gray);font-size:13px}
+    .info-banner strong{color:var(--light)}
+    .info-banner code{background:#222;padding:3px 7px;border-radius:4px;font-size:12px;color:#ccc}
+
+    /* ── Form ── */
+    .form-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;margin-bottom:22px}
+    .form-card h2{font:600 20px "Space Grotesk";margin-bottom:24px;letter-spacing:-.03em}
+    .field{margin-bottom:18px}
+    .field label{display:block;font-size:10px;letter-spacing:.12em;color:var(--gray);margin-bottom:6px;text-transform:uppercase}
+    .field input,.field textarea,.field select{width:100%;background:#1a1a1a;border:1px solid var(--border);border-radius:8px;padding:12px 14px;color:var(--light);font-size:14px;font-family:Inter,sans-serif;outline:none;transition:.2s}
+    .field input:focus,.field textarea:focus,.field select:focus{border-color:#888}
+    .field textarea{min-height:80px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+    .btn-row{display:flex;gap:10px;margin-top:8px}
+    .btn-primary{background:var(--accent);color:#080808;border:none;padding:13px 22px;border-radius:99px;font:600 12px Inter;cursor:pointer;transition:.2s;letter-spacing:.02em}
+    .btn-primary:hover{background:#fff}
+    .btn-secondary{background:transparent;color:var(--gray);border:1px solid var(--border);padding:13px 22px;border-radius:99px;font:500 12px Inter;cursor:pointer;transition:.2s}
+    .btn-secondary:hover{border-color:#888;color:var(--light)}
+
+    /* ── List ── */
+    .items-list{margin-top:18px}
+    .item-card{background:#0e0e0e;border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;transition:.2s}
+    .item-card:hover{border-color:#555}
+    .item-info h4{font:600 16px "Space Grotesk";letter-spacing:-.03em;margin-bottom:4px}
+    .item-info p{color:var(--gray);font-size:12px;max-width:500px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .item-info .item-type{font-size:9px;letter-spacing:.12em;color:#666;margin-bottom:4px}
+    .item-link{font-size:10px;color:#777;word-break:break-all}
+    .btn-delete{background:transparent;border:1px solid #442;border-radius:8px;color:#c66;padding:8px 14px;font-size:11px;cursor:pointer;transition:.2s;white-space:nowrap}
+    .btn-delete:hover{background:#311;border-color:#633}
+
+    .empty-state{color:#555;text-align:center;padding:40px;font-size:13px}
+
+    /* ── Output ── */
+    .output-section{margin-top:60px;border-top:1px solid var(--border);padding-top:40px}
+    .json-output{background:#0a0a0a;border:1px solid var(--border);border-radius:10px;padding:20px;font:13px/1.6 monospace;color:#999;max-height:340px;overflow:auto;white-space:pre-wrap;word-break:break-all}
+
+    .tab-bar{display:flex;gap:0;margin-bottom:30px;border-bottom:1px solid var(--border)}
+    .tab{padding:14px 24px;font-size:12px;letter-spacing:.06em;color:var(--gray);cursor:pointer;border-bottom:2px solid transparent;transition:.2s}
+    .tab.active{color:var(--light);border-color:var(--accent)}
+    .tab:hover{color:var(--light)}
+    .tab-content{display:none}.tab-content.active{display:block}
+
+    .toast{position:fixed;bottom:30px;right:30px;background:#1a1a1a;border:1px solid var(--border);color:var(--light);padding:14px 22px;border-radius:10px;font-size:13px;opacity:0;transform:translateY(10px);transition:.3s;pointer-events:none;z-index:999}
+    .toast.show{opacity:1;transform:translateY(0)}
+
+    @media(max-width:600px){.row{grid-template-columns:1fr}.container{padding:30px 20px 100px}.form-card{padding:22px}}
+  </style>
+</head>
+<body>
+
+<div class="admin-header">
+  <h1>NK. Admin Panel</h1>
+  <a href="index.html">← Back to Portfolio</a>
+</div>
+
+<div class="container">
+
+  <div class="info-banner">
+    <strong>How this works:</strong> Add your projects and graphic design work below. Click <strong>"Save & Generate JSON"</strong> to download the updated <code>data/projects.json</code> file. Then replace the file in your repo's <code>data/</code> folder, commit, and push. Your portfolio updates automatically on Vercel. <strong>No HTML editing needed!</strong>
+  </div>
+
+  <!-- ── Tabs ── -->
+  <div class="tab-bar">
+    <div class="tab active" data-tab="projects">Selected Work / Projects</div>
+    <div class="tab" data-tab="graphic">Graphic Design</div>
+    <div class="tab" data-tab="output">Export JSON</div>
+  </div>
+
+  <!-- ═══════ TAB: Projects ═══════ -->
+  <div class="tab-content active" id="tab-projects">
+    <div class="form-card">
+      <h2>Add a new project</h2>
+      <div class="field">
+        <label>Project Title</label>
+        <input type="text" id="proj-title" placeholder="e.g. My New App">
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Type / Category</label>
+          <input type="text" id="proj-type" placeholder="e.g. LIVE WEB PROJECT">
+        </div>
+        <div class="field">
+          <label>Link (optional)</label>
+          <input type="url" id="proj-link" placeholder="https://...">
+        </div>
+      </div>
+      <div class="field">
+        <label>Description</label>
+        <textarea id="proj-desc" placeholder="Short description of the project..."></textarea>
+      </div>
+      <div class="field">
+        <label>Tag (shown when no link)</label>
+        <input type="text" id="proj-tag" placeholder="e.g. Kotlin / Android">
+      </div>
+      <div class="btn-row">
+        <button class="btn-primary" onclick="addProject()">+ Add Project</button>
+      </div>
+    </div>
+
+    <div class="section-title">Current Projects</div>
+    <div id="proj-list" class="items-list"></div>
+  </div>
+
+  <!-- ═══════ TAB: Graphic Design ═══════ -->
+  <div class="tab-content" id="tab-graphic">
+    <div class="form-card">
+      <h2>Add graphic design work</h2>
+      <div class="field">
+        <label>Title</label>
+        <input type="text" id="gd-title" placeholder="e.g. Event Poster — Hackathon 2026">
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Type / Category</label>
+          <input type="text" id="gd-type" placeholder="e.g. POSTER DESIGN">
+        </div>
+        <div class="field">
+          <label>Link (to view / Behance / Drive etc.)</label>
+          <input type="url" id="gd-link" placeholder="https://...">
+        </div>
+      </div>
+      <div class="field">
+        <label>Description</label>
+        <textarea id="gd-desc" placeholder="Brief description of the design work..."></textarea>
+      </div>
+      <div class="field">
+        <label>Tag (shown when no link)</label>
+        <input type="text" id="gd-tag" placeholder="e.g. Canva / Photoshop">
+      </div>
+      <div class="btn-row">
+        <button class="btn-primary" onclick="addGraphicDesign()">+ Add Design Work</button>
+      </div>
+    </div>
+
+    <div class="section-title">Current Graphic Design Work</div>
+    <div id="gd-list" class="items-list"></div>
+  </div>
+
+  <!-- ═══════ TAB: Export ═══════ -->
+  <div class="tab-content" id="tab-output">
+    <div class="output-section" style="border:none;padding-top:0;margin-top:0">
+      <div class="section-title">Generated JSON</div>
+      <p style="color:var(--gray);font-size:13px;margin-bottom:16px;line-height:1.7">
+        Copy this JSON or click the download button. Then replace <code style="background:#222;padding:3px 7px;border-radius:4px;font-size:12px;color:#ccc">data/projects.json</code> in your repo and push to GitHub. Vercel will deploy automatically.
+      </p>
+      <div class="json-output" id="json-output"></div>
+      <div class="btn-row" style="margin-top:16px">
+        <button class="btn-primary" onclick="downloadJSON()">⬇ Download projects.json</button>
+        <button class="btn-secondary" onclick="copyJSON()">📋 Copy to Clipboard</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  /* ── State ── */
+  let state = { projects: [], graphicDesign: [] };
+
+  /* Try loading existing data */
+  fetch("data/projects.json")
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(d => { state = d; renderAll(); })
+    .catch(() => renderAll());
+
+  /* ── Tabs ── */
+  document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      document.getElementById("tab-" + tab.dataset.tab).classList.add("active");
+      if (tab.dataset.tab === "output") updateJSON();
+    });
+  });
+
+  /* ── Add Project ── */
+  function addProject() {
+    const title = g("proj-title");
+    if (!title) return toast("Please enter a title.");
+    state.projects.push({
+      title,
+      type: g("proj-type") || "PROJECT",
+      link: g("proj-link"),
+      description: g("proj-desc"),
+      tag: g("proj-tag")
+    });
+    clearFields("proj-title", "proj-type", "proj-link", "proj-desc", "proj-tag");
+    renderAll();
+    toast("Project added!");
+  }
+
+  /* ── Add Graphic Design ── */
+  function addGraphicDesign() {
+    const title = g("gd-title");
+    if (!title) return toast("Please enter a title.");
+    state.graphicDesign.push({
+      title,
+      type: g("gd-type") || "GRAPHIC DESIGN",
+      link: g("gd-link"),
+      description: g("gd-desc"),
+      tag: g("gd-tag")
+    });
+    clearFields("gd-title", "gd-type", "gd-link", "gd-desc", "gd-tag");
+    renderAll();
+    toast("Design work added!");
+  }
+
+  /* ── Delete ── */
+  function deleteProject(i) { state.projects.splice(i, 1); renderAll(); toast("Removed."); }
+  function deleteGD(i) { state.graphicDesign.splice(i, 1); renderAll(); toast("Removed."); }
+
+  /* ── Render ── */
+  function renderAll() {
+    renderList("proj-list", state.projects, "deleteProject");
+    renderList("gd-list", state.graphicDesign, "deleteGD");
+    updateJSON();
+  }
+
+  function renderList(containerId, items, deleteFn) {
+    const c = document.getElementById(containerId);
+    if (!items.length) {
+      c.innerHTML = '<div class="empty-state">No items yet. Add one above.</div>';
+      return;
+    }
+    c.innerHTML = items.map((item, i) => `
+      <div class="item-card">
+        <div class="item-info">
+          <div class="item-type">${esc(item.type)}</div>
+          <h4>${esc(item.title)}</h4>
+          <p>${esc(item.description || "—")}</p>
+          ${item.link ? `<div class="item-link">${esc(item.link)}</div>` : ""}
+        </div>
+        <button class="btn-delete" onclick="${deleteFn}(${i})">✕ Remove</button>
+      </div>
+    `).join("");
+  }
+
+  /* ── JSON Output ── */
+  function updateJSON() {
+    const el = document.getElementById("json-output");
+    if (el) el.textContent = JSON.stringify(state, null, 2);
+  }
+
+  function downloadJSON() {
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "projects.json";
+    a.click();
+    URL.revokeObjectURL(a.href);
+    toast("Downloaded!");
+  }
+
+  function copyJSON() {
+    navigator.clipboard.writeText(JSON.stringify(state, null, 2))
+      .then(() => toast("Copied to clipboard!"))
+      .catch(() => toast("Copy failed — try manually."));
+  }
+
+  /* ── Helpers ── */
+  function g(id) { return document.getElementById(id).value.trim(); }
+  function clearFields(...ids) { ids.forEach(id => document.getElementById(id).value = ""); }
+  function esc(s) { const d = document.createElement("div"); d.textContent = s || ""; return d.innerHTML; }
+  function toast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.remove("show"), 2500);
+  }
+</script>
+
+</body>
+</html>

@@ -75,4 +75,5 @@ const observer = new IntersectionObserver(entries=>{
     }
   });
 },{threshold:.08});
+window.__projObserver = observer;
 document.querySelectorAll(".experience,.project,.numbers div,.contact-panel").forEach(el=>observer.observe(el));
