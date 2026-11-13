@@ -116,7 +116,8 @@
         </p>
         <div class="actions">
           <a href="#projects" class="btn btn-light">View my work</a>
-          <a href="#graphic-design" class="btn btn-accent">Graphic Design</a>
+          <a href="#graphic-design" class="btn btn-accent" id="heroGraphicDesignBtn">Graphic Design</a>
+          <a href="docs/nitin-kumar-resume.pdf" download="Nitin_Kumar_Resume.pdf" class="btn btn-resume" target="_blank" rel="noopener"><span>Download Resume</span> <span class="btn-icon">↓</span></a>
           <a href="#contact" class="btn btn-dark">Contact me</a>
         </div>
         <div class="quick-info">
@@ -286,11 +287,63 @@
       <div class="section-tag">03.5 / GRAPHIC DESIGN</div>
       <div class="project-heading">
         <h2>Visual stories<br><span>that speak.</span></h2>
-        <p>Graphic design work including posters, social media creatives, branding and visual content.</p>
+        <p>A curated collection of poster designs, typography, halftone graphics, and photo manipulations.</p>
       </div>
-      <div class="projects-grid" id="graphicDesignGrid">
-        <!-- Dynamic graphic design projects load here from admin panel -->
+
+      <!-- Single Interactive Design Folder -->
+      <div class="design-folder-card" id="designFolderCard">
+        <div class="folder-header">
+          <div class="folder-tab">
+            <span class="folder-icon">📂</span>
+            <span class="folder-label">DESIGN ARCHIVE</span>
+          </div>
+          <span class="folder-count-badge" id="folderCountBadge">8 Works Inside</span>
+        </div>
+
+        <div class="folder-content">
+          <div class="folder-text">
+            <span class="folder-meta-tag">CURATED FOLDER</span>
+            <h3 class="folder-title">Posters & Visual Arts Archive</h3>
+            <p class="folder-description">
+              All graphic design and photo manipulation work organized into a single folder.
+              Explore conceptual posters, investigative media critiques, emotional typography, and halftone grunge artwork.
+            </p>
+            <div class="folder-tags-row">
+              <span>Photo Manipulation</span>
+              <span>Halftone Grunge</span>
+              <span>Acid Typography</span>
+              <span>Screenprints</span>
+            </div>
+            <button type="button" class="btn btn-folder-toggle" id="folderToggleBtn" aria-expanded="false">
+              <span class="folder-btn-text">Open Folder (8 Works)</span>
+              <span class="folder-btn-arrow">↓</span>
+            </button>
+          </div>
+
+          <div class="folder-stack-preview" id="folderStackPreview" role="button" tabindex="0" title="Click to open folder">
+            <div class="stack-card stack-3"><img src="assets/designs/chasing-greatness.jpg" alt="Chasing Greatness preview"></div>
+            <div class="stack-card stack-2"><img src="assets/designs/we-were-love.jpg" alt="We Were Love preview"></div>
+            <div class="stack-card stack-1"><img src="assets/designs/three-wise-monkeys.jpg" alt="Three Wise Monkeys preview"></div>
+            <div class="stack-badge">Click to Open Folder ↗</div>
+          </div>
+        </div>
+
+        <!-- Folder Drawer Grid (reveals when clicked) -->
+        <div class="folder-drawer" id="folderDrawer">
+          <div class="folder-drawer-header">
+            <div class="drawer-info">
+              <strong>All Artworks in this Folder</strong>
+              <small>Click any artwork to enlarge fullscreen with arrow navigation (‹ / ›)</small>
+            </div>
+            <button type="button" class="btn-drawer-close" id="drawerCloseBtn">Collapse Folder ✕</button>
+          </div>
+
+          <div class="projects-grid" id="graphicDesignGrid">
+            <!-- Dynamic graphic design projects load here from data/projects.json -->
+          </div>
+        </div>
       </div>
+
       <p id="gd-empty" class="empty-msg" style="color:#666;text-align:center;padding:60px 0;font-size:14px;display:none;">
         No graphic design work added yet.
       </p>

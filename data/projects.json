@@ -1,0 +1,69 @@
+{
+  "projects": [],
+  "graphicDesign": [
+    {
+      "id": "gd-1",
+      "title": "Three Wise Monkeys — DAMN.",
+      "type": "Conceptual Poster Design / Photo Manipulation",
+      "image": "assets/designs/three-wise-monkeys.jpg",
+      "description": "A conceptual poster inspired by the traditional philosophy of the Three Wise Monkeys — See No Evil, Speak No Evil, Hear No Evil.\n\nThis artwork reinterprets the philosophy through a contemporary visual approach, combining self-portrait photography, bold typography, textured backgrounds, and red graphic elements.\n\nThe composition explores the idea of selective awareness and the human tendency to ignore uncomfortable realities.",
+      "tag": "Three Wise Monkeys"
+    },
+    {
+      "id": "gd-2",
+      "title": "Chasing Greatness / Angst Grunge",
+      "type": "Halftone Grunge / Typographic Poster",
+      "image": "assets/designs/chasing-greatness.jpg",
+      "description": "An intense visual study on raw ambition, artistic struggle, and creative perseverance.\n\nCrafted with high-contrast halftone dot matrix texturing, heavy crimson red duotones, distressed typography (\"pain pain ... chasing greatness\"), and underground punk zine sensibilities.\n\nExpresses the internal friction between pressure and the relentless pursuit of greatness.",
+      "tag": "Angst Grunge"
+    },
+    {
+      "id": "gd-3",
+      "title": "DSPM University — BJMC Department",
+      "type": "Institutional Creative / Campus Branding",
+      "image": "assets/designs/dspmu-bjmc.jpg",
+      "description": "“Step into a world where your voice matters and your creativity shapes reality.”\n\nAn architectural typography poster designed for the Department of Journalism & Mass Communication at Dr. Shyama Prasad Mukherjee University, Ranchi.\n\nBlends monumental three-dimensional typography with campus architecture and street-sign iconography to welcome passionate storytellers into media professionals.",
+      "tag": "DSPMU BJMC"
+    },
+    {
+      "id": "gd-4",
+      "title": "NITIN — Fallible God",
+      "type": "Editorial Portrait / Color Block Minimalism",
+      "image": "assets/designs/fallible-god.jpg",
+      "description": "“Chat I think I'm in love — to fall in love is to create a religion that has a fallible god.”\n\nA stark, dual-tone editorial poster marrying bold color blocking (crimson red over magenta pink) with high-contrast graphic self-portraiture.\n\nInvestigates the psychology of infatuation, romantic idealization, and the vulnerability of placing unconditional faith in imperfect human beings.",
+      "tag": "Editorial Portrait"
+    },
+    {
+      "id": "gd-5",
+      "title": "We Were Love",
+      "type": "Romantic Grunge / Halftone Collage",
+      "image": "assets/designs/we-were-love.jpg",
+      "description": "“We were not lovers, we were love.”\n\nA tender, textured graphic exploration of connection that transcends conventional definitions.\n\nIncorporates delicate cyan-magenta CMYK halftone rosettes, glowing dreamlike typography, an intricate anatomical heart, and a black butterfly representing transformation and delicate emotional states.",
+      "tag": "Halftone Art"
+    },
+    {
+      "id": "gd-6",
+      "title": "The Myth of Saintliness / Teresa Critique",
+      "type": "Investigative Graphic / Media Critique",
+      "image": "assets/designs/teresa-critique.jpg",
+      "description": "A provocative, critical journalism poster examining media narratives, historical sanctification, and investigative accountability.\n\nRendered in deep saturated cobalt blue with electrostatic noise textures and bold yellow text highlights.\n\nChallenges uncritical consensus through the lens of evidence-based media ethics and contrarian historical inquiry.",
+      "tag": "Investigative Media"
+    },
+    {
+      "id": "gd-7",
+      "title": "Sunshine / Blue Means You",
+      "type": "Epistolary Art / Halftone Screenprint",
+      "image": "assets/designs/sunshine-blue.jpg",
+      "description": "“As I sit down to write this letter, I'm filled with a mix of emotions... And to me, blue means you.”\n\nA visual love letter evoking the sensation of vintage silkscreen printing and sun-faded risograph prints.\n\nCombines intimate serif prose, dot-matrix halftone grain, and striking magenta hues to capture the bittersweet warmth of nostalgic memories.",
+      "tag": "Visual Poetry"
+    },
+    {
+      "id": "gd-8",
+      "title": "BLINDED",
+      "type": "Acid Grunge / Contemporary Typographic Art",
+      "image": "assets/designs/blinded.jpg",
+      "description": "“It's so embarrassing, all the love I seek is living inside of me and I can't see, I'm blind.”\n\nA maximalist acid-grunge visual statement combining surreal cloudscape collage, distorted heavy display typography, barbed surveillance-eye graphics, and deeply personal self-reflection.\n\nExplores self-doubt, inner perception, and emotional awakening.",
+      "tag": "Acid Grunge"
+    }
+  ]
+}
